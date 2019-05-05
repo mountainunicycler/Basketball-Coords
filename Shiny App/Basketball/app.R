@@ -21,8 +21,8 @@ ui = fluidPage(
 		fluidRow(column(12, h1(''))),
 		fluidRow(
 			column(12, 
-				plotlyOutput('mainPlot', height="75vh"), 
-					type='html', loader='loader1'
+				withLoader(plotlyOutput('mainPlot', height="75vh"), 
+					type='html', loader='loader1')
 			)
 		)
 	),
