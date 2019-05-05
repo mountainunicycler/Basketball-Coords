@@ -66,3 +66,13 @@ body{
 	/*animation-delay: 3s;*/
 	animation-duration: 3s;
 }
+
+
+
+.js-plotly-plot .plotly .modebar{
+	background: rgba(0,0,0,.25);
+}
+
+#mainPlot > div > div > div.modebar.modebar--hover > div > a > svg > path{
+	fill: #3288BD;
+}
