@@ -1,0 +1,12 @@
+name: Basketball
+title: Basketball
+username:
+account: ryanzimmerman
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 910650
+bundleId: 2061724
+url: https://ryanzimmerman.shinyapps.io/Basketball/
+when: 1557076377.50734
+asMultiple: FALSE
+asStatic: FALSE
