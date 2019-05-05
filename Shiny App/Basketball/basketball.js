@@ -38,18 +38,14 @@ $(document).on('shiny:value shiny:error', function(event) {
 
 				var xcenter = pos.left - parentpos.left + bBox.width/2
 				var ycenter = pos.top - parentpos.top - bBox.height/2
-				// var xcenter = pos.left - (pos.left - parentpos.left)
-				// var ycenter = pos.top - (pos.top - parentpos.top)
 
 				$(this).css({transformOrigin: ''+xcenter+'px '+ycenter+'px 0px'})
 				$(this).css({fill: getRandomColor()});
-				// console.log(pos.left + ', '+ pos.top)
-				// $(this).css({transform: 'scale(.5)'})
+
 				$(this).addClass('animate-in')
 			})
 	}, 500);
 
-	// $('.js-tozero').css({display: 'none'});
 	setTimeout(
 		function(){
 				$('.js-line, .js-fill').css({opacity: '1'});
