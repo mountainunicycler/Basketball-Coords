@@ -1,0 +1,67 @@
+﻿Field name,Type,Mode,Description
+game_id,STRING,NULLABLE,[Game data] Unique identifier for the game
+season,INTEGER,NULLABLE,[Game data] Season the game was played in
+neutral_site,BOOLEAN,NULLABLE,[Game data] Indicator of whether the game was played on a neutral court
+scheduled_date,DATE,NULLABLE,[Game data] Date the game was played
+gametime,TIMESTAMP,NULLABLE,[Game data] Date and time the game was played
+tournament,STRING,NULLABLE,[Game data] Whether the game was played in a post-season tournament
+tournament_type,STRING,NULLABLE,[Game data] Type of post-season tournament a game was in played
+tournament_round,STRING,NULLABLE,[Game data] Tournament round
+tournament_game_no,STRING,NULLABLE,[Game data] Tournament game number
+player_id,STRING,NULLABLE,[Player info] Player Sportradar player ID
+last_name,STRING,NULLABLE,[Player info] Player last name
+first_name,STRING,NULLABLE,[Player info] Player first name
+full_name,STRING,NULLABLE,[Player info] Player full name
+abbr_name,STRING,NULLABLE,"[Player info] Player abbreviated name (""F.Last"")"
+status,STRING,NULLABLE,[Player info] Player status as of 2017-18 season
+jersey_number,INTEGER,NULLABLE,[Player info] Player jersey number
+height,INTEGER,NULLABLE,[Player info] Player height
+weight,INTEGER,NULLABLE,[Player info] Player weight
+birth_place,STRING,NULLABLE,"[Player info] Player birth place or home (Note: this information comes from the school's website, via Sportradar. While many of these entries indicate the player's birthplace, some of them may instead indicate the town that the players most identifies with.)"
+birthplace_city,STRING,NULLABLE,"[Player info] Player's home city (Note: this information comes from the school's website, via Sportradar. While many of these entries indicate the player's birthplace, some of them may instead indicate the town that the players most identifies with.)"
+birthplace_state,STRING,NULLABLE,"[Player info] Player's home state (Note: this information comes from the school's website, via Sportradar. While many of these entries indicate the player's birthplace, some of them may instead indicate the town that the players most identifies with.)"
+birthplace_country,STRING,NULLABLE,"[Player info] Player's home country (Note: this information comes from the school's website, via Sportradar. While many of these entries indicate the player's birthplace, some of them may instead indicate the town that the players most identifies with.)"
+class,STRING,NULLABLE,"[Player info] Player's class at game time (Note: this information comes from the school's website, via Sportradar.)"
+team_name,STRING,NULLABLE,[Team info] Team name
+team_market,STRING,NULLABLE,[Team info] Team school name (using Sportradar names)
+team_id,STRING,NULLABLE,[Team info] Sportradar team ID
+team_alias,STRING,NULLABLE,[Team info] Team alias
+conf_name,STRING,NULLABLE,[Team info] Team current conference name
+conf_alias,STRING,NULLABLE,[Team info] Team current conference alias
+division_name,STRING,NULLABLE,[Team info] Team current division name
+division_alias,STRING,NULLABLE,[Team info] Team current division alias
+league_name,STRING,NULLABLE,[Team info] Team current league name
+home_team,BOOLEAN,NULLABLE,[Team info] Indicator of whether the team was the home team
+active,BOOLEAN,NULLABLE,[Player stats] Indicator of whether the player was active for the game
+played,BOOLEAN,NULLABLE,[Player stats] Indicator of whether the player played in the game
+starter,BOOLEAN,NULLABLE,[Player stats] Indicator of whether the player started the game
+minutes,STRING,NULLABLE,[Player stats] Minutes played
+minutes_int64,INTEGER,NULLABLE,[Player stats] Minutes played (as integer)
+position,STRING,NULLABLE,[Player stats] Position
+primary_position,STRING,NULLABLE,[Player stats] Primary position
+field_goals_made,INTEGER,NULLABLE,[Player stats] Field goals made
+field_goals_att,INTEGER,NULLABLE,[Player stats] Field goals attempted
+field_goals_pct,FLOAT,NULLABLE,[Player stats] Field goal percentage
+three_points_made,INTEGER,NULLABLE,[Player stats] Three-pointers made
+three_points_att,INTEGER,NULLABLE,[Player stats] Three-pointers attempted
+three_points_pct,FLOAT,NULLABLE,[Player stats] Three-point shot percentage
+two_points_made,INTEGER,NULLABLE,[Player stats] Two-pointers made
+two_points_att,INTEGER,NULLABLE,[Player stats] Two-pointers attempted
+two_points_pct,FLOAT,NULLABLE,[Player stats] Two-point shot percentage
+blocked_att,INTEGER,NULLABLE,[Player stats] Number of shots blocked by the other team
+free_throws_made,INTEGER,NULLABLE,[Player stats] Free throws made
+free_throws_att,INTEGER,NULLABLE,[Player stats] Free throws attempted
+free_throws_pct,FLOAT,NULLABLE,[Player stats] Free throw percentage
+offensive_rebounds,INTEGER,NULLABLE,[Player stats] Offensive rebounds
+defensive_rebounds,INTEGER,NULLABLE,[Player stats] Defensive rebounds
+rebounds,INTEGER,NULLABLE,[Player stats] Total rebounds
+assists,INTEGER,NULLABLE,[Player stats] Assists
+turnovers,INTEGER,NULLABLE,[Player stats] Turnovers
+steals,INTEGER,NULLABLE,[Player stats] Steals
+blocks,INTEGER,NULLABLE,[Player stats] Blocks
+assists_turnover_ratio,FLOAT,NULLABLE,[Player stats] Assist-to-turnover ratio
+personal_fouls,INTEGER,NULLABLE,[Player stats] Personal fouls committed
+tech_fouls,INTEGER,NULLABLE,[Player stats] Technical fouls committed
+flagrant_fouls,INTEGER,NULLABLE,[Player stats] Flagrant fouls committed
+points,INTEGER,NULLABLE,[Player stats] Points scored
+sp_created,TIMESTAMP,NULLABLE,[Table data] Box score data entry time
