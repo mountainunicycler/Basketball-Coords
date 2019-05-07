@@ -4,9 +4,49 @@ library(shinyjs)
 library(shinycustomloader)
 library(plotly)
 library(tidyverse)
+library(fmsb)
 
 options(shiny.port = 8080)
 
+radarchart2 <- function(data,varlabs=NULL,grplabs=NULL,colors=(1:nrow(data)),axislim=NULL,fill=TRUE,title="")
+{
+  
+  makeTransparent<-function(someColor, alpha=50)
+  {
+    newColor<-col2rgb(someColor)
+    apply(newColor, 2, function(curcoldata){rgb(red=curcoldata[1], green=curcoldata[2],
+                                                blue=curcoldata[3],alpha=alpha, maxColorValue=255)})
+  }
+  if(!is.null(varlabs)) { 
+    if(length(varlabs) != ncol(data)) {stop("varlabs must have same length as ncol(data)")} 
+    names(data) <- varlabs }
+  if(!is.null(grplabs)) { 
+    if(length(grplabs) != nrow(data)) {stop("grplabs must have same length as ncol(data)")} 
+    rownames(data) <- grplabs }
+  
+  varlabs <- colnames(data); grplabs <- rownames(data)
+  
+  maxnum <- max(data); minnum <- min(data)
+  if(!is.null(axislim)) {  
+    maxnum <- axislim[2]; minnum <- axislim[1]
+    if( axislim[2] <= axislim[1] ) { stop("Max value must be greater than min value") }
+    if(!is.numeric(axislim)) { stop("Axis limits must be numeric")}
+  }
+  maxnum <- round(maxnum,1);minnum <- round(minnum,1)
+  
+  temp <- rbind(rep(maxnum,ncol(data)),rep(minnum,ncol(data)),data)
+  
+  colors_border <- colors
+  colors_fill <- NA
+  if(fill) { colors_fill <- makeTransparent(colors_border) }
+  caxislabels <- c(minnum,rep("",3),maxnum)
+  radarchart( temp, maxmin=TRUE, pcol=colors_border, pfcol=colors_fill,plwd=2 , plty=1,
+              cglcol="grey",cglty=1,cglwd=0.8,vlcex=0.8,
+              axistype=1,axislabcol="black",caxislabels=caxislabels,pch=20,title=title)
+  
+  legend("topright", legend = grplabs, bty = "n", pch=20 , col=colors_border , text.col = "black", cex=0.8, pt.cex=1,lty=1,
+         lwd=2)
+}
 
 # Define UI for application that draws a histogram
 ui = fluidPage(
