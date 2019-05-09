@@ -9,8 +9,15 @@ AND event_coord_y IS NOT NULL
 
 -------------
 
-
 SELECT team_name, three_point_shot, shot_made, type, shot_subtype, points_scored
 FROM `bigquery-public-data.ncaa_basketball.mbb_pbp_sr`
 WHERE team_name = 'Cavaliers' 
+AND type IN ('freethrow', 'fieldgoal')
+
+
+-------------
+
+SELECT team_name, three_point_shot, shot_made, type, shot_type, shot_subtype, points_scored, event_coord_x, event_coord_y, team_basket, elapsed_time_sec, game_clock, round
+FROM `bigquery-public-data.ncaa_basketball.mbb_pbp_sr`
+WHERE team_name = 'Fighting Irish'
 AND type IN ('freethrow', 'fieldgoal')
