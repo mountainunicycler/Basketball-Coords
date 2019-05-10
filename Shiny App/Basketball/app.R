@@ -8,6 +8,23 @@ library(fmsb)
 
 options(shiny.port = 8080)
 
+#bigger dataset
+
+csv_path <- './Shiny App/Basketball/Data'
+teams_list <- list.files(csv_path)
+teams_list
+
+empty_list <- list()
+
+for(i in 1:length(teams_list)){
+  print(paste(csv_path,teams_list[i],sep=''))
+  empty_list[[i]] <- read_csv(paste(csv_path,'/',teams_list[i],sep=''))
+  empty_list[[i]]$team <-teams_list[i]
+}
+
+Big_Teams <- bind_rows(empty_list)
+
+
 radarchart2 <- function(data,varlabs=NULL,grplabs=NULL,colors=(1:nrow(data)),axislim=NULL,fill=TRUE,title="")
 {
   
