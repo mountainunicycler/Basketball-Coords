@@ -33,7 +33,7 @@ body{
 .animate-in{
 	/*visibility: visible;*/
 	animation-name: floatup;
-	animation-duration: 4s;
+	animation-duration: 1.5s;
 	opacity: 0;
 	fill: none;
 }
@@ -64,7 +64,7 @@ body{
 	visibility: hidden;
 	animation-name: fadein;
 	/*animation-delay: 3s;*/
-	animation-duration: 3s;
+	animation-duration: 1s;
 }
 
 
