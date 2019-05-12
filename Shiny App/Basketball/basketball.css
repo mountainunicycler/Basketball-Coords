@@ -76,3 +76,8 @@ body{
 #mainPlot > div > div > div.modebar.modebar--hover > div > a > svg > path{
 	fill: #3288BD;
 }
+
+
+.textpoint > text {
+    fill: white !important;
+}

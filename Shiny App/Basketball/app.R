@@ -30,96 +30,6 @@ NEW <- read_csv("Data/big.csv")
 
 
 
-geom_hex <- function(mapping = NULL, data = NULL,
-                     stat = "binhex", position = "identity",
-                     ...,
-                     na.rm = FALSE,
-                     show.legend = NA,
-                     inherit.aes = TRUE) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomHex,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-
-#' @rdname ggplot2-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-GeomHex <- ggproto("GeomHex", Geom,
-  draw_group = function(data, panel_params, coord) {
-    if (!inherits(coord, "CoordCartesian")) {
-      stop("geom_hex() only works with Cartesian coordinates", call. = FALSE)
-    }
-
-    coords <- coord$transform(data, panel_params)
-    ggname("geom_hex", hexGrob(
-      coords$x, coords$y,
-      gp = gpar(
-        col = coords$colour,
-        fill = alpha(coords$fill, coords$alpha),
-        lwd = coords$size * .pt,
-        lty = coords$linetype
-      )
-    ))
-  },
-
-  required_aes = c("x", "y", "x2", "y2"),
-
-  default_aes = aes(
-    colour = NA,
-    fill = "grey50",
-    size = 0.5,
-    linetype = 1,
-    alpha = NA
-  ),
-
-  draw_key = draw_key_polygon
-)
-
-
-# Draw hexagon grob
-# Modified from code by Nicholas Lewin-Koh and Martin Maechler
-#
-# @param x positions of hex centres
-# @param y positions
-# @param size vector of hex sizes
-# @param gp graphical parameters
-# @keyword internal
-hexGrob <- function(x, y, x2, y2, size = rep(1, length(x)), gp = gpar()) {
-  stopifnot(length(y) == length(x))
-
-  dx <- resolution(x, FALSE)
-  dy <- resolution(y, FALSE) / sqrt(3) / 2 * 1.15
-  dx2 <- resolution(x2, FALSE)
-  dy2 <- resolution(y2, FALSE) / sqrt(3) / 2 * 1.15
-
-  hexC <- hexbin::hexcoords(dx-dx2, dy-dy2, n = 1)
-
-  n <- length(x)
-
-  polygonGrob(
-    x = rep.int(hexC$x, n) * rep(size, each = 6) + rep(x, each = 6),
-    y = rep.int(hexC$y, n) * rep(size, each = 6) + rep(y, each = 6),
-    default.units = "native",
-    id.lengths = rep(6, n), gp = gp
-  )
-}
-
-
-
-
-
 # Define UI for application that draws a histogram
 ui = fluidPage(
 	useShinyjs(),
@@ -230,24 +140,21 @@ server = function(input, output) {
 
 		# bears = read_csv("Bears.csv")
 
-
-		NEW %>% 
-			filter(team_name == 'Blue Devils')
-
-		
-		hexplot = ggplot(NEW, aes(event_coord_x, event_coord_y)) +
-			geom_hex(binwidth=15) + 
-			coord_fixed() + 
-			theme_void() + 
-			scale_fill_distiller(palette = 'Spectral') +
-			theme(legend.position = "none",
-    panel.background = element_rect(fill = "transparent") # bg of the panel
-    , plot.background = element_rect(fill = "transparent", color = NA) # bg of the plot
-    , panel.grid.major = element_blank() # get rid of major grid
-    , panel.grid.minor = element_blank() # get rid of minor grid
-    , legend.background = element_rect(fill = "transparent") # get rid of legend bg
-    , legend.box.background = element_rect(fill = "transparent") # get rid of legend panel bg
-  )
+		hexplot = NEW %>%
+		  filter(team_name == input$hexteam) %>%
+		  ggplot() +
+  			geom_hex(aes(event_coord_x, event_coord_y), binwidth=15) + 
+  			coord_fixed() + 
+  			theme_void() + 
+  			scale_fill_distiller(palette = 'Spectral') +
+  			theme(legend.position = "none",
+            panel.background = element_rect(fill = "transparent") # bg of the panel
+            , plot.background = element_rect(fill = "transparent", color = NA) # bg of the plot
+            , panel.grid.major = element_blank() # get rid of major grid
+            , panel.grid.minor = element_blank() # get rid of minor grid
+            , legend.background = element_rect(fill = "transparent") # get rid of legend bg
+            , legend.box.background = element_rect(fill = "transparent") # get rid of legend panel bg
+          )
 
 
 		# hide('load-anim')
@@ -276,6 +183,7 @@ server = function(input, output) {
 	  Radar_teams2 %>%
 	    ggradar() + scale_color_brewer(palette = 'Spectral') + 
 	    theme(
+	      text = element_text(colour = "white"),
     panel.background = element_rect(fill = "transparent") # bg of the panel
     , plot.background = element_rect(fill = "transparent", color = NA) # bg of the plot
     , panel.grid.major = element_blank() # get rid of major grid
