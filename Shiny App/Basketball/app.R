@@ -82,6 +82,11 @@ ui = fluidPage(
 					type='html', loader='loader1')
 			)
 		)
+		fluidRow(
+			column(12, 
+				plotOutput('radarplot')
+			)
+		)
 	),
 	# includeScript("jquery.js"),
 	includeScript("basketball.js")
