@@ -174,12 +174,12 @@ server = function(input, output) {
 	    mutate(ifstuff = ifelse(stuff == 2, 1, 0))
 	  
 	  Radar_teams2 <- Radar_teams %>%
-	    summarize(Three_Point_Shots = sum(three_point),
-	              Three_Point_Made = sum(ifstuff),
-	              Three_Point_Shot_Percent = (Three_Point_Made)/(Three_Point_Shots),
-	              Total_Shots = n(),
-	              Total_Shots_Made = sum(success_point),
-	              Total_Percent_Made = (Total_Shots_Made)/(Total_Shots)) %>%
+	    summarize(`Three Point Shots` = sum(three_point),
+	              `Three Point Made` = sum(ifstuff),
+	              `Three Point Shot Percent` = (`Three Point Made`)/(`Three Point Shots`),
+	              `Total Shots` = n(),
+	              `Total Shots Made` = sum(success_point),
+	              `Total Percent Made` = (`Total Shots Made`)/(`Total Shots`)) %>%
 	    mutate_each(funs(rescale), -team_name)
 	  Radar_teams2 %>%
 	    ggradar() + scale_color_brewer(palette = 'Spectral') + 
