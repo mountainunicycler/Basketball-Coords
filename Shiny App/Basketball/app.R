@@ -142,6 +142,7 @@ server = function(input, output) {
 
 		hexplot = NEW %>%
 		  filter(team_name == input$hexteam) %>%
+		  filter(type != 'freethrow')%>%
 		  ggplot() +
   			geom_hex(aes(event_coord_x, event_coord_y), binwidth=15) + 
   			coord_fixed() + 
