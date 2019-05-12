@@ -124,7 +124,6 @@ server = function(input, output) {
 
 	output$radarplot = renderPlot({
 	  NEW <- read_csv("Data/big.csv")
-	  view(NEW)
 	  
 	  Radar_teams <- NEW %>%
 	    group_by(team_name) %>%
@@ -142,7 +141,6 @@ server = function(input, output) {
 	              total_made = sum(success_point)/7000,
 	              total_percent = (total_made*7000)/(total_shots*13000)*2.3) %>%
 	    select(-team_name)
-	  View(Radar_teams2)
 	  
 	  radarchart2(as.data.frame(Radar_teams2), grplabs=c("Duke", "Virginia", "Wake Forest", "Notre Dame", "Virginia Tech", "Miami", "Syracuse", "Florida State", "North Carolina", "North Carolina State"), fill = F, title = "Teams Shooting Statistics in ACC")
 	})
