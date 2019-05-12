@@ -39,14 +39,80 @@ ui = fluidPage(
 		id = 'main-content',
 		fluidRow(column(12, h1('Force Of Habit: NCAA Basketball'))),
 		fluidRow(
+			column(3,
+				selectInput('hexteam', "Select Hexplot Team", 
+					c('Blue Devils',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack'
+					)
+				)
+			) 
+		),
+		fluidRow(
 			column(12, 
 				withLoader(plotlyOutput('mainPlot', height="75vh"), 
 					type='html', loader='loader1')
 			)
 		),
 		fluidRow(
-			column(10, offset = 1,
-				selectInput('team1',)
+			column(3,
+				selectInput('team1', "Team 1", c('Blue Devils',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			), 
+			column(3,
+				selectInput('team2', "Team 1", c('Blue Devils',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			),
+			column(3,
+				selectInput('team3', "Team 1", c('Blue Devils',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			),
+			column(3,
+				selectInput('team4', "Team 1", c('Blue Devils',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
 			)
 		),
 		fluidRow(
@@ -109,7 +175,16 @@ server = function(input, output) {
 	              total_percent = (total_made)/(total_shots)) %>%
 	    mutate_each(funs(rescale), -team_name)
 	  Radar_teams2 %>%
-	    ggradar()
+	    ggradar() + scale_color_brewer(palette = 'Spectral') + 
+	    theme(
+    panel.background = element_rect(fill = "transparent") # bg of the panel
+    , plot.background = element_rect(fill = "transparent", color = NA) # bg of the plot
+    , panel.grid.major = element_blank() # get rid of major grid
+    , panel.grid.minor = element_blank() # get rid of minor grid
+    , legend.background = element_rect(fill = "transparent") # get rid of legend bg
+    , legend.box.background = element_rect(fill = "transparent") # get rid of legend panel bg
+  )
+
 	  })
 }
 
