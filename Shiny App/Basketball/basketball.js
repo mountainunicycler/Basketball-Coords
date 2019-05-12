@@ -25,7 +25,8 @@ $(document).on('shiny:value shiny:error', function(event) {
 
 	setTimeout(
 		function() {
-			$('.js-line, .js-fill').not('.js-tozero').each(function(){
+
+			$('#mainPlot .js-line, #mainPlot.js-fill').not('.js-tozero').each(function(){
 				var pos = $(this).position()
 				var parentpos = $('#mainPlot').offset();
 				var bBox = $(this)[0].getBBox();
@@ -44,9 +45,9 @@ $(document).on('shiny:value shiny:error', function(event) {
 
 	setTimeout(
 		function(){
-				$('.js-line, .js-fill').css({opacity: '1'});
-				$('.js-line, .js-fill').not('.js-tozero').css({opacity: '0'});
-				$('.js-tozero').css({visibility: 'visible'});
+				$('#mainPlot .js-line, #mainPlot .js-fill').css({opacity: '1'});
+				$('#mainPlot .js-line, #mainPlot .js-fill').not('.js-tozero').css({opacity: '0'});
+				$('#mainPlot .js-tozero').css({visibility: 'visible'});
 
 		}, 1750);
 })

@@ -85,8 +85,13 @@ ui = fluidPage(
 			)
 		),
 		fluidRow(
+			column(10, offset = 1,
+				selectInput('team1',)
+			)
+		),
+		fluidRow(
 			column(12, 
-				plotlyOutput('radarplot')
+				plotlyOutput('radarplot', height="75vh")
 			)
 		)
 	),
