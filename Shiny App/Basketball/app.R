@@ -5,6 +5,8 @@ library(shinycustomloader)
 library(plotly)
 library(tidyverse)
 library(fmsb)
+library(ggradar)
+library(scales)
 
 options(shiny.port = 8080)
 
@@ -134,16 +136,16 @@ server = function(input, output) {
 	    mutate(ifstuff = ifelse(stuff == 2, 1, 0))
 	  
 	  Radar_teams2 <- Radar_teams %>%
-	    summarize(three_point_attempt = sum(three_point)/3500,
-	              three_point_made = sum(ifstuff)/1300,
-	              three_point_percent = (three_point_made*1300)/(three_point_attempt*3500)*3.5,
-	              total_shots = n()/13000,
-	              total_made = sum(success_point)/7000,
-	              total_percent = (total_made*7000)/(total_shots*13000)*2.3) %>%
-	    select(-team_name)
-	  
-	  radarchart2(as.data.frame(Radar_teams2), grplabs=c("Duke", "Virginia", "Wake Forest", "Notre Dame", "Virginia Tech", "Miami", "Syracuse", "Florida State", "North Carolina", "North Carolina State"), fill = F, title = "Teams Shooting Statistics in ACC")
-	})
+	    summarize(three_point_attempt = sum(three_point),
+	              three_point_made = sum(ifstuff),
+	              three_point_percent = (three_point_made)/(three_point_attempt),
+	              total_shots = n(),
+	              total_made = sum(success_point),
+	              total_percent = (total_made)/(total_shots)) %>%
+	    mutate_each(funs(rescale), -team_name)
+	  Radar_teams2 %>%
+	    ggradar()
+	  })
 }
 
 # Run the application 
