@@ -123,7 +123,28 @@ server = function(input, output) {
 	})
 
 	output$radarplot = renderPlot({
-		# This is where that goes:: 
+	  NEW <- read_csv("~/Mscs 264 S19/Submit/Final/FINAL DS PROJECT/Shiny App/Basketball/Data/big.csv")
+	  view(NEW)
+	  
+	  Radar_teams <- NEW %>%
+	    group_by(team_name) %>%
+	    select(three_point_shot, shot_made, points_scored) %>%
+	    mutate(three_point = ifelse(three_point_shot == TRUE, 1, 0)) %>%
+	    mutate(success_point = ifelse(shot_made == TRUE, 1, 0)) %>%
+	    mutate(stuff = success_point + three_point) %>%
+	    mutate(ifstuff = ifelse(stuff == 2, 1, 0))
+	  
+	  Radar_teams2 <- Radar_teams %>%
+	    summarize(three_point_attempt = sum(three_point)/3500,
+	              three_point_made = sum(ifstuff)/1300,
+	              three_point_percent = (three_point_made*1300)/(three_point_attempt*3500)*3.5,
+	              total_shots = n()/13000,
+	              total_made = sum(success_point)/7000,
+	              total_percent = (total_made*7000)/(total_shots*13000)*2.3) %>%
+	    select(-team_name)
+	  View(Radar_teams2)
+	  
+	  radarchart2(as.data.frame(Radar_teams2), grplabs=c("Duke", "Virginia", "Wake Forest", "Notre Dame", "Virginia Tech", "Miami", "Syracuse", "Florida State", "North Carolina", "North Carolina State"), fill = F, title = "Teams Shooting Statistics in ACC")
 	})
 }
 
