@@ -40,9 +40,10 @@ ui = fluidPage(
 	# 	),
 	div(
 		id = 'main-content',
-		fluidRow(column(12, h1('Force Of Habit: NCAA Basketball'))),
+		fluidRow(column(10, offset = 1, h1('Force Of Habit: NCAA Basketball'))),
+		fluidRow(column(10, offset = 1, p('Spatial map of all shots taken up to the 2018 NCAA season by the team selected below.'))),
 		fluidRow(
-			column(3,
+			column(3, offset = 1,
 				selectInput('hexteam', "Select Hexplot Team", 
 					c('Blue Devils',
 					'Cavaliers',
@@ -65,7 +66,7 @@ ui = fluidPage(
 			)
 		),
 		fluidRow(
-			column(3,
+			column(2, offset = 1,
 				selectInput('team1', "Team 1", c('Orange',
 					'Cavaliers',
 					'Demon Deacons',
@@ -78,7 +79,7 @@ ui = fluidPage(
 					'Wolfpack')
 					)
 			), 
-			column(3,
+			column(2,
 				selectInput('team2', "Team 1", c('Cavaliers',
 					'Blue Devils',
 					'Demon Deacons',
@@ -91,7 +92,7 @@ ui = fluidPage(
 					'Wolfpack')
 					)
 			),
-			column(3,
+			column(2,
 				selectInput('team3', "Team 1", c('Seminoles',
 					'Cavaliers',
 					'Demon Deacons',
@@ -104,7 +105,7 @@ ui = fluidPage(
 					'Wolfpack')
 					)
 			),
-			column(3,
+			column(2,
 				selectInput('team4', "Team 1", c('Hokies',
 					'Cavaliers',
 					'Demon Deacons',
