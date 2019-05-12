@@ -75,7 +75,7 @@ ui = fluidPage(
 	# 	),
 	div(
 		id = 'main-content',
-		fluidRow(column(12, h1(''))),
+		fluidRow(column(12, h1('Force Of Habit: NCAA Basketball'))),
 		fluidRow(
 			column(12, 
 				withLoader(plotlyOutput('mainPlot', height="75vh"), 
@@ -84,7 +84,7 @@ ui = fluidPage(
 		),
 		fluidRow(
 			column(12, 
-				plotOutput('radarplot')
+				plotlyOutput('radarplot')
 			)
 		)
 	),
@@ -122,7 +122,7 @@ server = function(input, output) {
 		print(hexplot)
 	})
 
-	output$radarplot = renderPlot({
+	output$radarplot = renderPlotly({
 	  NEW <- read_csv("Data/big.csv")
 	  
 	  Radar_teams <- NEW %>%
