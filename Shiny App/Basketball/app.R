@@ -156,21 +156,21 @@ ui = fluidPage(
 		),
 		fluidRow(
 			column(3,
-				selectInput('team1', "Team 1", c('Blue Devils',
+				selectInput('team1', "Team 1", c('Orange',
 					'Cavaliers',
 					'Demon Deacons',
 					'Fighting Irish',
 					'Hokies',
 					'Hurricanes',
-					'Orange',
+					'Blue Devils',
 					'Seminoles',
 					'Tar Heels',
 					'Wolfpack')
 					)
 			), 
 			column(3,
-				selectInput('team2', "Team 1", c('Blue Devils',
-					'Cavaliers',
+				selectInput('team2', "Team 1", c('Cavaliers',
+					'Blue Devils',
 					'Demon Deacons',
 					'Fighting Irish',
 					'Hokies',
@@ -182,24 +182,24 @@ ui = fluidPage(
 					)
 			),
 			column(3,
-				selectInput('team3', "Team 1", c('Blue Devils',
+				selectInput('team3', "Team 1", c('Seminoles',
 					'Cavaliers',
 					'Demon Deacons',
 					'Fighting Irish',
 					'Hokies',
 					'Hurricanes',
 					'Orange',
-					'Seminoles',
+					'Blue Devils',
 					'Tar Heels',
 					'Wolfpack')
 					)
 			),
 			column(3,
-				selectInput('team4', "Team 1", c('Blue Devils',
+				selectInput('team4', "Team 1", c('Hokies',
 					'Cavaliers',
 					'Demon Deacons',
 					'Fighting Irish',
-					'Hokies',
+					'Blue Devils',
 					'Hurricanes',
 					'Orange',
 					'Seminoles',
@@ -258,7 +258,7 @@ server = function(input, output) {
 	  
 	  Radar_teams <- NEW %>%
 	    group_by(team_name) %>%
-	    filter(team_name == input$team1) %>%
+	    filter(team_name %in% c(input$team1, input$team2, input$team3, input$team4)) %>%
 	    select(three_point_shot, shot_made, points_scored) %>%
 	    mutate(three_point = ifelse(three_point_shot == TRUE, 1, 0)) %>%
 	    mutate(success_point = ifelse(shot_made == TRUE, 1, 0)) %>%
