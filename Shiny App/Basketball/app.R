@@ -116,6 +116,10 @@ server = function(input, output) {
 		# hide('load-anim')
 		print(hexplot)
 	})
+
+	output$radarplot = renderPlot({
+		# This is where that goes:: 
+	})
 }
 
 # Run the application 
