@@ -10,19 +10,19 @@ options(shiny.port = 8080)
 
 #bigger dataset
 
-csv_path <- './Shiny App/Basketball/Data'
-teams_list <- list.files(csv_path)
-teams_list
+# csv_path <- './Shiny App/Basketball/Data'
+# teams_list <- list.files(csv_path)
+# teams_list
 
-empty_list <- list()
+# empty_list <- list()
+# 
+# for(i in 1:length(teams_list)){
+#   print(paste(csv_path,teams_list[i],sep=''))
+#   empty_list[[i]] <- read_csv(paste(csv_path,'/',teams_list[i],sep=''))
+#   empty_list[[i]]$team <-teams_list[i]
+# }
 
-for(i in 1:length(teams_list)){
-  print(paste(csv_path,teams_list[i],sep=''))
-  empty_list[[i]] <- read_csv(paste(csv_path,'/',teams_list[i],sep=''))
-  empty_list[[i]]$team <-teams_list[i]
-}
-
-Big_Teams <- bind_rows(empty_list)
+# Big_Teams <- bind_rows(empty_list)
 
 
 radarchart2 <- function(data,varlabs=NULL,grplabs=NULL,colors=(1:nrow(data)),axislim=NULL,fill=TRUE,title="")
@@ -81,7 +81,7 @@ ui = fluidPage(
 				withLoader(plotlyOutput('mainPlot', height="75vh"), 
 					type='html', loader='loader1')
 			)
-		)
+		),
 		fluidRow(
 			column(12, 
 				plotOutput('radarplot')
@@ -123,7 +123,7 @@ server = function(input, output) {
 	})
 
 	output$radarplot = renderPlot({
-	  NEW <- read_csv("~/Mscs 264 S19/Submit/Final/FINAL DS PROJECT/Shiny App/Basketball/Data/big.csv")
+	  NEW <- read_csv("Data/big.csv")
 	  view(NEW)
 	  
 	  Radar_teams <- NEW %>%
