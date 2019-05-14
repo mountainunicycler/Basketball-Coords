@@ -210,7 +210,7 @@ server = function(input, output) {
 	  # input$hexteam = 'Blue Devils'
 
 		dir = 'Data/'
-		type = '.csv'
+		type = '_5000.csv'
 	  
 		hexplot = read_csv(paste(dir,input$hexteam,type,sep = ''),
          cols(
@@ -228,7 +228,7 @@ server = function(input, output) {
            game_clock = col_time(format = ""),
            round = col_character()
          ), col_names = T) %>%
-		  filter(type != 'freethrow')%>%
+		  # filter(type != 'freethrow')%>%
 		  ggplot() +
   			geom_hex(aes(event_coord_x, event_coord_y), binwidth=15) + 
   			coord_fixed() + 
