@@ -141,10 +141,12 @@ server = function(input, output) {
 		# show('load-anim')
 
 		# bears = read_csv("Bears.csv")
-
+	  # input$hexteam = 'Blue Devils'
+	  
 		hexplot = NEW %>%
 		  filter(team_name == input$hexteam) %>%
 		  filter(type != 'freethrow')%>%
+		  sample_n(5000) %>%
 		  ggplot() +
   			geom_hex(aes(event_coord_x, event_coord_y), binwidth=15) + 
   			coord_fixed() + 
