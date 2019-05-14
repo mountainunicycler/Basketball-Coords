@@ -46,8 +46,8 @@ ui = fluidPage(
 		fluidRow(
 			column(3, offset = 1,
 				selectInput('hexteam', "Select Hexplot Team", 
-					c('Blue Devils',
-					'Cavaliers',
+					c('Cavaliers',
+					'Blue Devils',
 					'Demon Deacons',
 					'Fighting Irish',
 					'Hokies',
