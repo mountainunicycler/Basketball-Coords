@@ -59,6 +59,8 @@ ui = fluidPage(
 				)
 			) 
 		),
+		fluidRow(column(10, offset = 1, p('The plot below is a hexplot that shows the exact coordinate a specific shot was made at. Each hexagon is interactive and will show the total number of shots from the location. This is also a heatmap that will be red where a bunch of shots were taken and blue where only a few were taken. A note is that we also had to filter out free throws since we were only getting a hotspot on the free throw line and was making the rest of the data look insignificant.'))),
+		
 		fluidRow(
 			column(12, 
 				withLoader(plotlyOutput('mainPlot', height="75vh"), 
@@ -125,7 +127,7 @@ ui = fluidPage(
 			)
 		)
 	),
-	fluidRow(column(10, offset = 1, h3('The plot above is a radar chart that will take 4 teams or less if the same team is selected more than once, and compare their shots to the other teams that were picked. If one wants to compare teams that are not Duke, then one should not pick Duke on the dropdown menu since they are so dominant. '))),
+	fluidRow(column(10, offset = 1, p('The plot above is a radar chart that will take 4 teams or less if the same team is selected more than once, and compare their shots to the other teams that were picked. If one wants to compare teams that are not Duke, then one should not pick Duke on the dropdown menu since they are so dominant. '))),
 	# includeScript("jquery.js"),
 	includeScript("basketball.js")
 )
