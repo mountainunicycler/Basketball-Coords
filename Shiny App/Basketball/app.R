@@ -41,7 +41,7 @@ ui = fluidPage(
 	div(
 		id = 'main-content',
 		fluidRow(column(10, offset = 1, h1('Force Of Habit: NCAA Basketball'))),
-		fluidRow(column(10, offset = 1, p('Spatial map of all shots taken up to the 2018 NCAA season by the team selected below.'))),
+		fluidRow(column(10, offset = 1, h3('Spatial map of all shots taken up to the 2018 NCAA season by the team selected below.'))),
 		fluidRow(
 			column(3, offset = 1,
 				selectInput('hexteam', "Select Hexplot Team", 
