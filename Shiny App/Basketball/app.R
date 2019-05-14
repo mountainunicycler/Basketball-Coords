@@ -27,6 +27,7 @@ options(shiny.port = 8080)
 # Big_Teams <- bind_rows(empty_list)
 
 NEW <- read_csv("Data/big.csv")
+shots3000 <- read_csv("Data/shots3000.csv")
 
 
 
@@ -68,68 +69,6 @@ ui = fluidPage(
 			)
 		),
 
-		fluidRow(
-			column(2, offset = 1,
-				selectInput('team1', "Team 1", c('Orange',
-					'Cavaliers',
-					'Demon Deacons',
-					'Fighting Irish',
-					'Hokies',
-					'Hurricanes',
-					'Blue Devils',
-					'Seminoles',
-					'Tar Heels',
-					'Wolfpack')
-				),
-				selectInput('team2', "Team 2", c('Cavaliers',
-					'Blue Devils',
-					'Demon Deacons',
-					'Fighting Irish',
-					'Hokies',
-					'Hurricanes',
-					'Orange',
-					'Seminoles',
-					'Tar Heels',
-					'Wolfpack')
-				),
-				selectInput('team3', "Team 3", c('Seminoles',
-					'Cavaliers',
-					'Demon Deacons',
-					'Fighting Irish',
-					'Hokies',
-					'Hurricanes',
-					'Orange',
-					'Blue Devils',
-					'Tar Heels',
-					'Wolfpack')
-				),
-				selectInput('team4', "Team 4", c('Hokies',
-					'Cavaliers',
-					'Demon Deacons',
-					'Fighting Irish',
-					'Blue Devils',
-					'Hurricanes',
-					'Orange',
-					'Seminoles',
-					'Tar Heels',
-					'Wolfpack')
-				),
-				selectInput('team4', "Team 4", c('Hokies',
-					'Cavaliers',
-					'Demon Deacons',
-					'Fighting Irish',
-					'Blue Devils',
-					'Hurricanes',
-					'Orange',
-					'Seminoles',
-					'Tar Heels',
-					'Wolfpack')
-				)
-			),
-			column(8, 
-				plotlyOutput('radarplot', height="75vh")
-			)
-		),
 		# fluidRow(
 		# 	column(2, offset = 1,
 		# 		selectInput('team1', "Team 1", c('Orange',
@@ -142,9 +81,7 @@ ui = fluidPage(
 		# 			'Seminoles',
 		# 			'Tar Heels',
 		# 			'Wolfpack')
-		# 			)
-		# 	), 
-		# 	column(2,
+		# 		),
 		# 		selectInput('team2', "Team 2", c('Cavaliers',
 		# 			'Blue Devils',
 		# 			'Demon Deacons',
@@ -155,9 +92,7 @@ ui = fluidPage(
 		# 			'Seminoles',
 		# 			'Tar Heels',
 		# 			'Wolfpack')
-		# 			)
-		# 	),
-		# 	column(2,
+		# 		),
 		# 		selectInput('team3', "Team 3", c('Seminoles',
 		# 			'Cavaliers',
 		# 			'Demon Deacons',
@@ -168,9 +103,7 @@ ui = fluidPage(
 		# 			'Blue Devils',
 		# 			'Tar Heels',
 		# 			'Wolfpack')
-		# 			)
-		# 	),
-		# 	column(2,
+		# 		),
 		# 		selectInput('team4', "Team 4", c('Hokies',
 		# 			'Cavaliers',
 		# 			'Demon Deacons',
@@ -181,9 +114,77 @@ ui = fluidPage(
 		# 			'Seminoles',
 		# 			'Tar Heels',
 		# 			'Wolfpack')
-		# 			)
-			# )
+		# 		),
+		# 		selectInput('team4', "Team 4", c('Hokies',
+		# 			'Cavaliers',
+		# 			'Demon Deacons',
+		# 			'Fighting Irish',
+		# 			'Blue Devils',
+		# 			'Hurricanes',
+		# 			'Orange',
+		# 			'Seminoles',
+		# 			'Tar Heels',
+		# 			'Wolfpack')
+		# 		)
+		# 	),
+		# 	column(8, 
+		# 		plotlyOutput('radarplot', height="75vh")
+		# 	)
 		# ),
+		fluidRow(
+			column(2, offset = 1,
+				selectInput('team1', "Team 1", c('Orange',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Blue Devils',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			), 
+			column(2,
+				selectInput('team2', "Team 2", c('Cavaliers',
+					'Blue Devils',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			),
+			column(2,
+				selectInput('team3', "Team 3", c('Seminoles',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Hokies',
+					'Hurricanes',
+					'Orange',
+					'Blue Devils',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			),
+			column(2,
+				selectInput('team4', "Team 4", c('Hokies',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Blue Devils',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+					)
+			)
+		),
 		fluidRow(
 			column(12, 
 				plotlyOutput('radarplot', height="75vh")
@@ -207,11 +208,27 @@ server = function(input, output) {
 
 		# bears = read_csv("Bears.csv")
 	  # input$hexteam = 'Blue Devils'
+
+		dir = 'Data/'
+		type = '.csv'
 	  
-		hexplot = NEW %>%
-		  filter(team_name == input$hexteam) %>%
+		hexplot = read_csv(paste(dir,input$hexteam,type,sep = ''),
+         cols(
+           team_name = col_character(),
+           three_point_shot = col_logical(),
+           shot_made = col_logical(),
+           type = col_character(),
+           shot_type = col_character(),
+           shot_subtype = col_character(),
+           points_scored = col_double(),
+           event_coord_x = col_double(),
+           event_coord_y = col_double(),
+           team_basket = col_character(),
+           elapsed_time_sec = col_double(),
+           game_clock = col_time(format = ""),
+           round = col_character()
+         ), col_names = T) %>%
 		  filter(type != 'freethrow')%>%
-		  sample_n(5000) %>%
 		  ggplot() +
   			geom_hex(aes(event_coord_x, event_coord_y), binwidth=15) + 
   			coord_fixed() + 
