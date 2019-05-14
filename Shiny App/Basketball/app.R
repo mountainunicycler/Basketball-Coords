@@ -80,7 +80,7 @@ ui = fluidPage(
 					)
 			), 
 			column(2,
-				selectInput('team2', "Team 1", c('Cavaliers',
+				selectInput('team2', "Team 2", c('Cavaliers',
 					'Blue Devils',
 					'Demon Deacons',
 					'Fighting Irish',
@@ -93,7 +93,7 @@ ui = fluidPage(
 					)
 			),
 			column(2,
-				selectInput('team3', "Team 1", c('Seminoles',
+				selectInput('team3', "Team 3", c('Seminoles',
 					'Cavaliers',
 					'Demon Deacons',
 					'Fighting Irish',
@@ -106,7 +106,7 @@ ui = fluidPage(
 					)
 			),
 			column(2,
-				selectInput('team4', "Team 1", c('Hokies',
+				selectInput('team4', "Team 4", c('Hokies',
 					'Cavaliers',
 					'Demon Deacons',
 					'Fighting Irish',
@@ -125,6 +125,7 @@ ui = fluidPage(
 			)
 		)
 	),
+	fluidRow(column(10, offset = 1, h3('The plot above is a radar chart that will take 4 teams or less if the same team is selected more than once, and compare their shots to the other teams that were picked. If one wants to compare teams that are not Duke, then one should not pick Duke on the dropdown menu since they are so dominant. '))),
 	# includeScript("jquery.js"),
 	includeScript("basketball.js")
 )
