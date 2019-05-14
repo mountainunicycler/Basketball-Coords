@@ -59,7 +59,7 @@ ui = fluidPage(
 				)
 			) 
 		),
-		fluidRow(column(10, offset = 1, p('The plot below is a hexplot that shows the exact coordinate a specific shot was made at. Each hexagon is interactive and will show the total number of shots from the location. This is also a heatmap that will be red where a bunch of shots were taken and blue where only a few were taken. A note is that we also had to filter out free throws since we were only getting a hotspot on the free throw line and was making the rest of the data look insignificant.'))),
+		fluidRow(column(10, offset = 1, p('The plot below is a hexplot that shows the frequency of shots at each location on the basketball court. Each hexagon is interactive and will show the total number of shots from the location. This is a heatmap that will be red where a bunch of shots were taken and blue where only a few were taken. We filtered out free throws since the freethrow position is by far the most common single point, hiding the variation in the rest of the data.'))),
 		
 		fluidRow(
 			column(12, 
@@ -67,6 +67,7 @@ ui = fluidPage(
 					type='html', loader='loader1')
 			)
 		),
+
 		fluidRow(
 			column(2, offset = 1,
 				selectInput('team1', "Team 1", c('Orange',
@@ -79,9 +80,7 @@ ui = fluidPage(
 					'Seminoles',
 					'Tar Heels',
 					'Wolfpack')
-					)
-			), 
-			column(2,
+				),
 				selectInput('team2', "Team 2", c('Cavaliers',
 					'Blue Devils',
 					'Demon Deacons',
@@ -92,9 +91,7 @@ ui = fluidPage(
 					'Seminoles',
 					'Tar Heels',
 					'Wolfpack')
-					)
-			),
-			column(2,
+				),
 				selectInput('team3', "Team 3", c('Seminoles',
 					'Cavaliers',
 					'Demon Deacons',
@@ -105,9 +102,7 @@ ui = fluidPage(
 					'Blue Devils',
 					'Tar Heels',
 					'Wolfpack')
-					)
-			),
-			column(2,
+				),
 				selectInput('team4', "Team 4", c('Hokies',
 					'Cavaliers',
 					'Demon Deacons',
@@ -118,9 +113,77 @@ ui = fluidPage(
 					'Seminoles',
 					'Tar Heels',
 					'Wolfpack')
-					)
+				),
+				selectInput('team4', "Team 4", c('Hokies',
+					'Cavaliers',
+					'Demon Deacons',
+					'Fighting Irish',
+					'Blue Devils',
+					'Hurricanes',
+					'Orange',
+					'Seminoles',
+					'Tar Heels',
+					'Wolfpack')
+				)
+			),
+			column(8, 
+				plotlyOutput('radarplot', height="75vh")
 			)
 		),
+		# fluidRow(
+		# 	column(2, offset = 1,
+		# 		selectInput('team1', "Team 1", c('Orange',
+		# 			'Cavaliers',
+		# 			'Demon Deacons',
+		# 			'Fighting Irish',
+		# 			'Hokies',
+		# 			'Hurricanes',
+		# 			'Blue Devils',
+		# 			'Seminoles',
+		# 			'Tar Heels',
+		# 			'Wolfpack')
+		# 			)
+		# 	), 
+		# 	column(2,
+		# 		selectInput('team2', "Team 2", c('Cavaliers',
+		# 			'Blue Devils',
+		# 			'Demon Deacons',
+		# 			'Fighting Irish',
+		# 			'Hokies',
+		# 			'Hurricanes',
+		# 			'Orange',
+		# 			'Seminoles',
+		# 			'Tar Heels',
+		# 			'Wolfpack')
+		# 			)
+		# 	),
+		# 	column(2,
+		# 		selectInput('team3', "Team 3", c('Seminoles',
+		# 			'Cavaliers',
+		# 			'Demon Deacons',
+		# 			'Fighting Irish',
+		# 			'Hokies',
+		# 			'Hurricanes',
+		# 			'Orange',
+		# 			'Blue Devils',
+		# 			'Tar Heels',
+		# 			'Wolfpack')
+		# 			)
+		# 	),
+		# 	column(2,
+		# 		selectInput('team4', "Team 4", c('Hokies',
+		# 			'Cavaliers',
+		# 			'Demon Deacons',
+		# 			'Fighting Irish',
+		# 			'Blue Devils',
+		# 			'Hurricanes',
+		# 			'Orange',
+		# 			'Seminoles',
+		# 			'Tar Heels',
+		# 			'Wolfpack')
+		# 			)
+			# )
+		# ),
 		fluidRow(
 			column(12, 
 				plotlyOutput('radarplot', height="75vh")
