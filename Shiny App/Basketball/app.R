@@ -125,7 +125,7 @@ ui = fluidPage(
 			)
 		)
 	),
-	fluidRow(column(10, offset = 1, h3('The plot above is a radar chart that will take 4 teams or less if the same team is selected more than once, and compare their shots to the other teams that were picked. If one wants to compare teams that are not Duke, then one should not pick Duke on the dropdown menu since they are so dominant. '))),
+	fluidRow(column(10, offset = 1, p('The plot above is a radar chart that will take 4 teams or less if the same team is selected more than once, and compare their shots to the other teams that were picked. If one wants to compare teams that are not Duke, then one should not pick Duke on the dropdown menu since they are so dominant. '))),
 	# includeScript("jquery.js"),
 	includeScript("basketball.js")
 )
